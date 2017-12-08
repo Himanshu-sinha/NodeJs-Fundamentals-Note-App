@@ -12,23 +12,25 @@ console.log('Command: ', command);
 console.log('Yargs', argv);
 
 if (command === 'add') {
-  var note = notes.addNote(argv.title, argv.body);
+    var note = notes.addNote(argv.title, argv.body);
 
-if (note){
-    console.log('note succeeded');
-    console.log('--');
-    console.log(`Title: ${note.title}`);
-    console.log(`Body: ${note.body}`);   
-}else{
-    console.log('note did not succeeded');
-}
+    if (note) {
+        console.log('note succeeded');
+        console.log('--');
+        console.log(`Title: ${note.title}`);
+        console.log(`Body: ${note.body}`);
+    } else {
+        console.log('note did not succeeded');
+    }
 
 } else if (command === 'list') {
-  notes.getAll();
+    notes.getAll();
 } else if (command === 'read') {
-  notes.getNote(argv.title);
+    notes.getNote(argv.title);
 } else if (command === 'remove') {
-  notes.removeNote(argv.title);
+    var removedNote = notes.removeNote(argv.title);
+    var message = removedNote ? 'Note was removed' : 'note was not found';
+    console.log(message);
 } else {
-  console.log('Command not recognized');
+    console.log('Command not recognized');
 }
